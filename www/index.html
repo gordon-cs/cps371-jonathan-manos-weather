@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Weather</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+  <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+  <!-- ionic/angularjs js -->
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <script src="lib/ionic/js/angular/angular-resource.js"></script>
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="cordova.js"></script>
+
+  <!-- your app's js -->
+  <script src="js/app.js"></script>
+
+</head>
+<body ng-app="weather">
+  <div class="bar bar-header bar-positive">
+    <button class="button icon ion-social-android"></button>
+    <h1 id="header" class="title">Weather in Wenham</h1>
+    <button class="button icon ion-social-android"></button>
+  </div>
+
+
+
+
+
+
+  <ion-tabs class="tabs-striped tabs-top tabs-background-positive tabs-color-light has-tabs-top">
+
+    <ion-tab title="Tab1" icon-on="ion-ios-location" icon-off="ion-ios-location-outline">
+      <ion-nav-view name="tab-1">
+        <ion-content  scroll="false" padding="true">
+
+          <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
+          <div id="map"></div>
+
+          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcSicGYpiFmA1z-0pBMYA02NVwEcfwPk0&libraries=places&callback=initMap"
+          async defer></script>
+
+
+        </ion-content>
+      </ion-nav-view>
+    </ion-tab>
+
+    <ion-tab title="Tab2" icon-on="ion-ios-rainy" icon-off="ion-ios-rainy-outline">
+      <ion-nav-view name="tab-2">
+        <ion-content  ng-controller="MainCtrl" scroll="true" padding="true" has-header="true">
+          <div class="center">
+
+            <button onclick="b()" class="button button-full button-assertive">Refresh Weather From Selected Location</button>
+
+
+                   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+
+
+            <script>console.log("today")</script>
+
+
+
+            <div class="card">
+              <div class="item item-divider">
+                Daily Summary
+              </div>
+              <div id="summary" class="item item-text-wrap">
+
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="item item-divider">
+                Current Temperature
+              </div>
+              <div  class="item item-text-wrap">
+                <div id="temperature">
+
+              </div>
+              <div id="realFeel">
+
+            </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="item item-divider">
+                Current Status
+              </div>
+              <div id="status" class="item item-text-wrap">
+
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="item item-divider">
+                Precipitation
+              </div>
+              <div class="item item-text-wrap">
+                <div id="precip">
+
+              </div>
+              <div id = "precipType">
+
+              </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="item item-divider">
+                Nearest Storm Distance
+              </div>
+              <div id="stormDistance" class="item item-text-wrap">
+
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="item item-divider">
+                Miscellaneous Info
+              </div>
+              <div class="item item-text-wrap">
+                <div id="wind">
+                </div>
+                <div id="humidity">
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </ion-content>
+      </ion-nav-view>
+    </ion-tab>
+
+
+
+
+
+
+
+    </ion-tabs>
+
+
+
+
+
+
+
+
+  </body>
+  </html>
