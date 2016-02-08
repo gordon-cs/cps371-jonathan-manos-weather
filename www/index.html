@@ -22,10 +22,16 @@
   <!-- cordova script (this will be a 404 during development) -->
   <script src="cordova.js"></script>
 
-  <!-- your app's js -->
-  <script src="js/app.js"></script>
-  <script src="js/controller.js"></script>
+  <!-- your app's js
   <script src="js/service.js"></script>
+  <script src="js/controller.js"></script>
+  <script src="js/app.js"></script>
+-->
+
+  <!-- full app js -->
+  <script src="js/fullApp.js"></script>
+
+
 
 </head>
 <body ng-app="weather">
@@ -44,9 +50,9 @@
 
     <ion-tab title="Tab1" icon-on="ion-ios-location" icon-off="ion-ios-location-outline">
       <ion-nav-view name="tab-1">
-        <ion-content  scroll="false" padding="true">
+        <ion-content  ng-controller="MainCtrl" scroll="false" padding="true">
 
-          <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
+          <input id="pac-input" class="controls" type="text" placeholder="Enter a location" ng-focus="disableTap()">
           <div id="map"></div>
 
 

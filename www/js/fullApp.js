@@ -1,4 +1,50 @@
-// app.js
+// Ionic Starter App
+'use strict';
+
+
+
+var globalLatitude  = 42.589611;
+var globalLongitude = -70.819806;
+
+// 'weather' is referenced in index.html, 2nd arg is dependencies
+// 'weather' is referenced in index.html, 2nd arg is dependencies
+var weatherApp = angular.module('weather', ['ionic', 'ngResource']);
+
+var forecastioWeather = ['$q', '$resource', '$http', 'FORECASTIO_KEY',
+    function($q, $resource, $http, FORECASTIO_KEY) {
+	var url = 'https://api.forecast.io/forecast/' + FORECASTIO_KEY + '/';
+
+	return {
+	    getCurrentWeather: function(globalLatitude, globalLongitude) {
+		return $http.jsonp(url + globalLatitude + ',' + globalLongitude +
+				   '?callback=JSON_CALLBACK');
+	    }
+	}
+    }
+];
+
+weatherApp.directive('disabletap', function($timeout) {
+  return {
+    link: function() {
+      $timeout(function() {
+        container = document.getElementsByClassName('pac-container');
+        // disable ionic data tab
+        angular.element(container).attr('data-tap-disabled', 'true');
+        // leave input field if google-address-entry is selected
+        angular.element(container).on("click", function(){
+            document.getElementById('type-selector').blur();
+        });
+
+      },500);
+
+    }
+  };
+});
+
+weatherApp.constant('FORECASTIO_KEY', '14e723fbe931ee119ade496aabcf28ba');
+
+weatherApp.controller('MainCtrl',
+    function($scope,$state,WeatherData) {
 
 
 	//call getCurrentWeather method in factory
@@ -36,9 +82,24 @@ function b(){
     });
 }
 
+
+
 // This example adds a search box to a map, using the Google Place Autocomplete
 // feature. People can enter geographical searches. The search box will return a
 // pick list containing a mix of places and predicted search terms.
+
+// This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+
+
+
+// This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: -33.8688, lng: 151.2195},

@@ -1,8 +1,8 @@
+
+
 //service.js
 
 'use strict';
-
-weatherApp.constant('FORECASTIO_KEY', '14e723fbe931ee119ade496aabcf28ba');
 
 
 var globalLatitude  = 42.589611;
@@ -24,3 +24,5 @@ var forecastioWeather = ['$q', '$resource', '$http', 'FORECASTIO_KEY',
 	}
     }
 ];
+
+weatherApp.constant('FORECASTIO_KEY', '14e723fbe931ee119ade496aabcf28ba');
