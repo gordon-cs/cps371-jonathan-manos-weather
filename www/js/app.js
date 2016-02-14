@@ -75,7 +75,7 @@ function b(){
       $('#status').html(data.currently.summary);
     });
 }
-setInterval('b()',500);
+setInterval('b()',1000);
 
 
 // This example adds a search box to a map, using the Google Place Autocomplete
@@ -133,7 +133,7 @@ function initMap() {
 
       globalLatitude = place.geometry.location.lat();
       globalLongitude = place.geometry.location.lng();
-      
+
 
 
       if (!place.geometry) {

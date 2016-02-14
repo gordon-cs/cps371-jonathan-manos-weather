@@ -56,9 +56,9 @@
       </ion-nav-view>
     </ion-tab>
 
-    <ion-tab   href="weather" title="Tab2" icon-on="ion-ios-rainy" icon-off="ion-ios-rainy-outline">
+    <ion-tab  href="weather" title="Tab2" icon-on="ion-ios-rainy" icon-off="ion-ios-rainy-outline">
       <ion-nav-view animation="slide-left-right" name="tab-2">
-        <ion-content scroll="true" padding="true">
+        <ion-content scroll="true" padding="true" has-bouncing="true">
           <div class="center">
 
 
@@ -137,6 +137,9 @@
               </div>
             </div>
 
+            <a class = "item" href="#" onclick="window.open('http://forecast.io', '_system', 'location=yes'); return false;">
+            Powered by Forecast.io
+          </a>
 
           </div>
         </ion-content>
@@ -152,7 +155,7 @@
     <ion-footer-bar align-title="center" class="bar-positive">
         <button class="button icon ion-social-android"></button>
       <h1 class="title">
-        <button class="button" onclick="location.href='http://forecast.io';">Powered by Forecast.io</button>
+          Jon & AJ Productions
       </h1>
       <button class="button icon ion-social-android"></button>
     </ion-footer-bar>
