@@ -12,32 +12,23 @@
   <script src="lib/ionic/js/ionic.bundle.js"></script>
   <script src="lib/ionic/js/angular/angular-resource.js"></script>
 
-  <!-- google maps api -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcSicGYpiFmA1z-0pBMYA02NVwEcfwPk0&libraries=places&callback=initMap"
-  async defer></script>
-
-  <!-- google ajax jquery-->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
   <!-- cordova script (this will be a 404 during development) -->
   <script src="cordova.js"></script>
 
-  <!-- your app's js
-  <script src="js/service.js"></script>
-  <script src="js/controller.js"></script>
+  <!-- your app's js -->
   <script src="js/app.js"></script>
--->
 
-  <!-- full app js -->
-  <script src="js/fullApp.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcSicGYpiFmA1z-0pBMYA02NVwEcfwPk0&libraries=places&callback=initMap"
+  async></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" async></script>
 
 
 
 </head>
-<body ng-app="weather">
+<body ng-app="weather" ng-controller="MyCtrl">
   <div class="bar bar-header bar-positive">
     <button class="button icon ion-social-android"></button>
-    <h1 id="header" class="title">Weather in Wenham</h1>
+    <h1 id="header" class="title">Weather in Current Location</h1>
     <button class="button icon ion-social-android"></button>
   </div>
 
@@ -48,12 +39,15 @@
 
   <ion-tabs class="tabs-striped tabs-top tabs-background-positive tabs-color-light has-tabs-top">
 
-    <ion-tab title="Tab1" icon-on="ion-ios-location" icon-off="ion-ios-location-outline">
-      <ion-nav-view name="tab-1">
-        <ion-content  ng-controller="MainCtrl" scroll="false" padding="true">
+    <ion-tab href="location" title="Tab1" icon-on="ion-ios-location" icon-off="ion-ios-location-outline">
+      <ion-nav-view animation="slide-left-right" name="tab-1">
+        <ion-content scroll="false" padding="false">
 
+          <div id="pac-container">
           <input id="pac-input" class="controls" type="text" placeholder="Enter a location" ng-focus="disableTap()">
+          </div>
           <div id="map"></div>
+
 
 
 
@@ -62,12 +56,10 @@
       </ion-nav-view>
     </ion-tab>
 
-    <ion-tab title="Tab2" icon-on="ion-ios-rainy" icon-off="ion-ios-rainy-outline">
-      <ion-nav-view name="tab-2">
-        <ion-content  ng-controller="MainCtrl" scroll="true" padding="true" has-header="true">
+    <ion-tab   href="weather" title="Tab2" icon-on="ion-ios-rainy" icon-off="ion-ios-rainy-outline">
+      <ion-nav-view animation="slide-left-right" name="tab-2">
+        <ion-content scroll="true" padding="true">
           <div class="center">
-
-            <button onclick="b()" class="button button-full button-assertive">Refresh Weather From Selected Location</button>
 
 
 
@@ -155,16 +147,15 @@
 
 
 
-
-
     </ion-tabs>
 
-
-
-
-
-
-
+    <ion-footer-bar align-title="center" class="bar-positive">
+        <button class="button icon ion-social-android"></button>
+      <h1 class="title">
+        <button class="button" onclick="location.href='http://forecast.io';">Powered by Forecast.io</button>
+      </h1>
+      <button class="button icon ion-social-android"></button>
+    </ion-footer-bar>
 
   </body>
   </html>

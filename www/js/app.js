@@ -1,21 +1,18 @@
-// app.js
+// Ionic Starter App
 
 
-	//call getCurrentWeather method in factory
-	WeatherData.getCurrentWeather(globalLatitude, globalLongitude).then(function(resp) {
-	    $scope.current = resp.data;
-	    console.log('GOT CURRENT', $scope.current);
-	}, function(error) {
-	    alert('Unable to get current conditions');
-	    console.error(error);
-	});
-    }
-);
 
-weatherApp.factory('WeatherData', forecastioWeather);
+var globalLatitude  = 42.589611;
+var globalLongitude = -70.819806;
+var temp = "";
 
-function b(){
+// 'weather' is referenced in index.html, 2nd arg is dependencies
+// 'weather' is referenced in index.html, 2nd arg is dependencies
+var weatherApp = angular.module('weather', ['ionic', 'ngResource']);
 
+
+weatherApp.controller('MyCtrl', function($scope, $ionicTabsDelegate) {
+  $scope.b = function() {
     var apiKey = '14e723fbe931ee119ade496aabcf28ba';
     var url = 'https://api.forecast.io/forecast/';
     var data;
@@ -34,11 +31,57 @@ function b(){
       $('#humidity').html("Humidity: " + data.currently.humidity*100 + "%");
       $('#status').html(data.currently.summary);
     });
+  }
+
+  $scope.selectTabWithIndex = function(index) {
+      $ionicTabsDelegate.select(index);
+    }
+  $scope.disableTap = function(){
+    container = document.getElementsByClassName('pac-container');
+    // disable ionic data tab
+    angular.element(container).attr('data-tap-disabled', 'true');
+    // leave input field if google-address-entry is selected
+    angular.element(container).on("click", function(){
+        document.getElementById('pac-input').blur();
+    });
+  };
+})
+
+
+
+function b(){
+
+    var apiKey = '14e723fbe931ee119ade496aabcf28ba';
+    var url = 'https://api.forecast.io/forecast/';
+    var data;
+
+    $.getJSON(url + apiKey + "/" + globalLatitude + "," + globalLongitude + "?callback=?", function(data) {
+      console.log(data);
+      $('#temperature').html("Current Temperature: " + Math.floor(data.currently.temperature) + " °F");
+      $('#summary').html(data.daily.summary);
+      if(!isNaN(data.currently.nearestStormDistance)){
+      $('#stormDistance').html(Math.floor(data.currently.nearestStormDistance) + " Miles Away");
+      }
+      else{
+      $('#stormDistance').html("No Storm Nearby");
+      }
+      $('#realFeel').html("Real Feel: " + Math.floor(data.currently.apparentTemperature) + " °F");
+      $('#precip').html("Precipitation Chance: " + Math.floor(data.currently.precipProbability*100) + "%");
+      if(!data.currently.precipProbability==0){
+      $('#precipType').html("Precipitation Type: " + data.currently.precipType);
+      }
+      $('#wind').html("Wind Speed: " + Math.floor(data.currently.windSpeed) + " Miles per Hour");
+      $('#humidity').html("Humidity: " + Math.floor(data.currently.humidity*100) + "%");
+      $('#status').html(data.currently.summary);
+    });
 }
+setInterval('b()',500);
+
 
 // This example adds a search box to a map, using the Google Place Autocomplete
 // feature. People can enter geographical searches. The search box will return a
 // pick list containing a mix of places and predicted search terms.
+
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: -33.8688, lng: 151.2195},
@@ -56,7 +99,7 @@ function initMap() {
 
 
       infoWindow.setPosition(pos);
-      infoWindow.setContent('Location found.');
+      infoWindow.setContent('Location found! :)');
       map.setCenter(pos);
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
@@ -90,11 +133,22 @@ function initMap() {
 
       globalLatitude = place.geometry.location.lat();
       globalLongitude = place.geometry.location.lng();
+      
+
 
       if (!place.geometry) {
         window.alert("Autocomplete's returned place contains no geometry");
         return;
       }
+
+      //update all the weather info + more comments so I can find this line
+      //
+      //
+      //
+      //
+      //
+      //
+      //
 
       // If the place has a geometry, then present it on a map.
       if (place.geometry.viewport) {
@@ -133,10 +187,3 @@ function initMap() {
     });
 
   }
-
-  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    infoWindow.setPosition(pos);
-    infoWindow.setContent(browserHasGeolocation ?
-      'Error: The Geolocation service failed.' :
-      'Error: Your browser doesn\'t support geolocation.');
-    }
