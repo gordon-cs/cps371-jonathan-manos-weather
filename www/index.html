@@ -1,164 +1,177 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Weather</title>
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <head>
+    <meta charset="utf-8">
+    <title>Weather</title>
+    <meta name="viewport"
+          content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
 
-  <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
-  <!-- ionic/angularjs js -->
-  <script src="lib/ionic/js/ionic.bundle.js"></script>
-  <script src="lib/ionic/js/angular/angular-resource.js"></script>
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ionic/js/angular/angular-resource.js"></script>
 
-  <!-- cordova script (this will be a 404 during development) -->
-  <script src="cordova.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
 
-  <!-- your app's js -->
-  <script src="js/app.js"></script>
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/constants.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcSicGYpiFmA1z-0pBMYA02NVwEcfwPk0&libraries=places&callback=initMap"
-  async></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" async></script>
-
-
-
-</head>
-<body ng-app="weather" ng-controller="MyCtrl">
-  <div class="bar bar-header bar-positive">
-    <button class="button icon ion-social-android"></button>
-    <h1 id="header" class="title">Weather in Current Location</h1>
-    <button class="button icon ion-social-android"></button>
-  </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcSicGYpiFmA1z-0pBMYA02NVwEcfwPk0&libraries=places&callback=initMap"
+    async></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" async></script>
 
 
+  </head>
+  <body id="please" ng-controller="MainCtrl" ng-app="weather">
+
+    <!-- TODO: BUG: header contents aren't centered. -->
+    <ion-header-bar class="bar-dark">
+      <h1 id="title" class="title">InstaWeather</h1>
+    </ion-header-bar>
 
 
 
+    <!-- <ion-nav-bar class="bar-positive">
+    </ion-nav-bar> -->
 
-  <ion-tabs class="tabs-striped tabs-top tabs-background-positive tabs-color-light has-tabs-top">
+    <ion-pane class="pane">
+        <ion-content scroll="false">
 
-    <ion-tab href="location" title="Tab1" icon-on="ion-ios-location" icon-off="ion-ios-location-outline">
-      <ion-nav-view animation="slide-left-right" name="tab-1">
-        <ion-content scroll="false" padding="false">
-
-          <div id="pac-container">
-          <input id="pac-input" class="controls" type="text" placeholder="Enter a location" ng-focus="disableTap()">
+          <div class="row row-2 center">
           </div>
-          <div id="map"></div>
 
+          <div class="row row-4 center">
 
+            <div id="selectLocation" class="col center">
 
+            <p id="selectLocationText">Weather in Current Location</p><br><br>
 
-
-        </ion-content>
-      </ion-nav-view>
-    </ion-tab>
-
-    <ion-tab  href="weather" title="Tab2" icon-on="ion-ios-rainy" icon-off="ion-ios-rainy-outline">
-      <ion-nav-view animation="slide-left-right" name="tab-2">
-        <ion-content scroll="true" padding="true" has-bouncing="true">
-          <div class="center">
-
-
-
-
-
-
-            <script>console.log("today")</script>
-
-
-
-            <div class="card">
-              <div class="item item-divider">
-                Weekly Summary
-              </div>
-              <div id="summary" class="item item-text-wrap">
-
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="item item-divider">
-                Current Temperature
-              </div>
-              <div  class="item item-text-wrap">
-                <div id="temperature">
-
-              </div>
-              <div id="realFeel">
+            <br>
+            <br>
 
             </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="item item-divider">
-                Current Status
-              </div>
-              <div id="status" class="item item-text-wrap">
-
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="item item-divider">
-                Precipitation
-              </div>
-              <div class="item item-text-wrap">
-                <div id="precip">
-
-              </div>
-              <div id = "precipType">
-
-              </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="item item-divider">
-                Nearest Storm Distance
-              </div>
-              <div id="stormDistance" class="item item-text-wrap">
-
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="item item-divider">
-                Miscellaneous Info
-              </div>
-              <div class="item item-text-wrap">
-                <div id="wind">
-                </div>
-                <div id="humidity">
-                </div>
-              </div>
-            </div>
-
-            <a class = "item" href="#" onclick="window.open('http://forecast.io', '_system', 'location=yes'); return false;">
-            Powered by Forecast.io
-          </a>
 
           </div>
+
+          <div class="row row-2 center">
+          </div>
+
+          <div class="row row-5-top center">
+            <div class="col">
+            </div>
+            <div class="col">
+              <script>console.log("today")</script>
+              <div id="pac-container">
+              <input id="pac-input" class="controls" type="text" placeholder="Enter a new location" ng-focus="disableTap()">
+              </div>
+            </div>
+            <div class="col">
+            </div>
+          </div>
+
+          <div class="row row-4 center">
+          </div>
+          <div class="row row-2 center">
+          </div>
+
+          <div class="row row-30">
+            <div id="summaryPanel" class="col center">
+              <img src="https://cdn3.iconfinder.com/data/icons/weather-and-forecast/51/Weather_icons_grey-03-512.png" alt="Weather Icon" style="width:150px;height:150px;">
+              <br>
+              <br>
+              <p id="summary">{{weatherSummary}}</p></div>
+            <div id="tempPanel" class="col center">
+              <p id="headers">Current:</p>
+              <div id="temps">
+                <p id="currentTemp">{{tempCurrent}} °F</p>
+              </div>
+              <p id="headers">Real Feel:</p>
+              <div id ="temps">
+                <p id="realFeelTemp"> {{realFeel}} °F</p>
+              </div>
+              <p id="headers">Tonight:</p>
+              <div id ="temps">
+                 <p id="tempLow">{{tempTonightLow}} °F</p>
+               </div>
+              <p id="headers">Tomorrow's Range:</p>
+              <div id ="temps">
+                <p id="tempRange">{{tempTomorrowHigh}}/{{tempTomorrowLow}} °F</p>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row row-10">
+
+          </div>
+          <div class="row row-10">
+
+          </div>
+          <div class="row row-12">
+            <div class="col center">
+              <p id="textHeaders">Nearby Storm Distance</p>
+              <div id="textItems">
+                <p id="stormDistance">{{stormDistance}}</p><br>
+              </div>
+              </div>
+            <div class="col center">
+              <p id="textHeaders">Precipitation Chance</p>
+              <div id="textItems">
+                <p id="precip">{{precipitation}}</p><br>
+              </div>
+              </div>
+          </div>
+          <div class="row row-12">
+            <div class="col center">
+              <p id="textHeaders">Wind Speed</p>
+              <div id="textItems">
+              <p id="wind">{{wind}} MPH</p><br>
+            </div>
+            </div>
+            <div class="col center">
+              <p id="textHeaders">Humidity</p>
+              <div id="textItems">
+                <p id="humidity">{{humidity}}%</p><br>
+              </div>
+            </div>
+          </div>
+          <div class="row row-12">
+            <div class="col center">
+              <p id="textHeaders">Visibility</p>
+              <div id="textItems">
+                <p id="visibility">{{visibility}} Miles</p><br>
+              </div>
+              </div>
+            <div class="col center">
+              <p id="textHeaders">Cloud Cover</p>
+              <div id="textItems">
+                <p id="cloudCover">{{cloudCover}}</p><br>
+              </div>
+              </div>
+              <div class="col center">
+                <p id="textHeaders">Dew Point</p>
+                <div id="textItems">
+                  <p id="dewPoint">{{dewPoint}} °F</p><br>
+                </div>
+              </div>
+          </div>
+
+          <div class="row row-5-bot">
+            <div id="footers" class="col center">
+              <a href="#" onclick="window.open('http://forecast.io', '_system', 'location=yes'); return false;">
+                Powered by Forecast.io
+              </a>
+            </div>
+            <div id="footers" class="col center"><p id="dateTime">{{currentTime}}</p></div>
+          </div>
         </ion-content>
-      </ion-nav-view>
-    </ion-tab>
-
-
-
-
-
-    </ion-tabs>
-
-    <ion-footer-bar align-title="center" class="bar-positive">
-        <button class="button icon ion-social-android"></button>
-      <h1 class="title">
-          Jon & AJ Productions
-      </h1>
-      <button class="button icon ion-social-android"></button>
-    </ion-footer-bar>
+      </ion-pane>
 
   </body>
-  </html>
+</html>

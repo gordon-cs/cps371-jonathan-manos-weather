@@ -1,27 +1,106 @@
 /* Empty. Add your own CSS if you like */
-/* Empty. Add your own CSS if you like */
-html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
 
 .center {
     text-align: center;
+    margin-top: auto;
 }
 
-#map {
-        height: 100%;
-      }
-.controls {
-  margin-top: 10px;
-  border: 1px solid transparent;
-  border-radius: 2px 0 0 2px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  height: 32px;
-  outline: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+.row-2 {
+    min-height: 2%;
+    max-height: 2%;
+}
+.row-4 {
+    min-height: 4%;
+    max-height: 4%;
+}
+
+.row-5-top {
+    min-height: 5%;
+    max-height: 5%;
+}
+.row-5-mid {
+    min-height: 5%;
+    max-height: 5%;
+
+}
+.row-5-bot {
+    background-color: #444;
+    min-height: 5%;
+    max-height: 5%;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+.row-10 {
+    min-height: 10%;
+    max-height: 10%;
+}
+
+.row-12 {
+    min-height: 12%;
+    max-height: 12%;
+}
+.row-30 {
+    min-height: 30%;
+    max-height: 30%;
+}
+
+.pane {
+    background-color: #886aea;
+    background: #886aea; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#555,  #886aea, #555); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#555, #886aea, #555); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#555, #886aea, #555); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#555, #886aea, #555); /* Standard syntax */
+}
+
+
+#selectLocation{
+  color:white;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+#headers{
+  color:black;
+  font-weight: 700;
+}
+
+#textHeaders{
+  color:black;
+  font-weight: 700;
+  line-height: 50%;
+}
+
+#temps{
+  color: white;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+#textItems{
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+#footers{
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+#summary{
+  color:white;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 110%;
+}
+
+#title{
+  text-align: center;
 }
 
 #pac-input {
@@ -29,10 +108,12 @@ html, body {
   font-family: Roboto;
   font-size: 15px;
   font-weight: 300;
-  margin-left: 12px;
   padding: 0 11px 0 13px;
+  border-color: : #000;
+  border-width: medium;
+  border-radius: 10px;
   text-overflow: ellipsis;
-  width: 250px;
+  width: 300px;
 }
 
 #pac-input:focus {
@@ -41,16 +122,4 @@ html, body {
 
 .pac-container {
   font-family: Roboto;
-}
-
-#type-selector {
-  color: #fff;
-  background-color: #4d90fe;
-  padding: 5px 11px 0px 11px;
-}
-
-#type-selector label {
-  font-family: Roboto;
-  font-size: 13px;
-  font-weight: 300;
 }
