@@ -13,3 +13,5 @@ most users.
 page.
 * Changed Format of Display - Instead of using cards to display information,
 Used rows and columns to display information more beautifully.
+* Added new Data Points - More information displayed and grouped in appropriate
+areas.
