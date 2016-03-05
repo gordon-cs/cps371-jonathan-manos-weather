@@ -91,7 +91,8 @@ weatherApp.controller('MainCtrl',
 
 
 
-    // updates the weather information for a new location
+    // updates the weather information for a new location, similar to the scope
+    // functions from service.js
     function updateHTML(lat, lng){
 
         var apiKey = 'd0d763687cc9d29c0a8fef2c10095883';
@@ -152,6 +153,10 @@ weatherApp.controller('MainCtrl',
           {
             $('#stormDistance').html(distance + " Miles Away");
           }
+          else if(distance == 1)
+          {
+            $('#stormDistance').html("1 Mile Away");
+          }
           else if(distance == 0)
           {
             $('#stormDistance').html("Within 1 Mile");
@@ -165,7 +170,7 @@ weatherApp.controller('MainCtrl',
           var precipitationType = data.currently.precipType;
           if(precipitationProbability != 0)
           {
-            precipitationProbability *= 100;
+            precipitationProbability = Math.round(precipitationProbability*100);
             $('#precip').html(precipitationProbability + "% chance of " + precipitationType);
           }
           else

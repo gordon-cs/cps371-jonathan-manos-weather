@@ -49,9 +49,6 @@ weatherApp.service('weatherData', ['$q', '$resource', '$http',
             });
         };
 
-        // TODO: move roundTemp into controller, since it is part of
-        // presentation, not weather data.
-
         // Round temp to tenths of a degree.
         this.roundTemp = function(temp) {
             if (Math.abs(temp) >= 9.5) {
@@ -71,7 +68,15 @@ weatherApp.service('weatherData', ['$q', '$resource', '$http',
             var distance = weatherStore.current.currently.nearestStormDistance;
             if(distance > 0)
             {
-              return weatherStore.current.currently.nearestStormDistance  + " Miles Away";
+              return distance  + " Miles Away";
+            }
+            else if(distance == 1)
+            {
+              return "1 Mile Away";
+            }
+            else if(distance == 0)
+            {
+              return "Within 1 Mile";
             }
             else
             {
@@ -148,7 +153,7 @@ weatherApp.service('weatherData', ['$q', '$resource', '$http',
             var precipitationType = weatherStore.current.currently.precipType;
             if(precipitationProbability != 0)
             {
-              precipitationProbability *= 100;
+              precipitationProbability = Math.round(precipitationProbability * 100);
               return precipitationProbability + "% chance of " + precipitationType;
             }
             else

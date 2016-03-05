@@ -5,6 +5,11 @@
     margin-top: auto;
 }
 
+.row-1 {
+    min-height: 1%;
+    max-height: 1%;
+}
+
 .row-2 {
     min-height: 2%;
     max-height: 2%;
